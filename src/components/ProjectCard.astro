@@ -6,56 +6,22 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, tags } = project.data;
+const { title, description, tags, image } = project.data;
 ---
 
-<article>
-  <h3><a href={`/projects/${project.id}`}>{title}</a></h3>
-  <p class="muted">{description}</p>
+<article class="project">
+  <a href={`/projects/${project.id}`}>
+    <div class="project__img">{image && <img src={image} alt="" />}</div>
+    <h3 class="title">{title}</h3>
+  </a>
+  <p class="caption">{description}</p>
   {
     tags.length > 0 && (
-      <ul>
+      <div class="project__tags">
         {tags.map((tag) => (
-          <li>{tag}</li>
+          <span class="tag">{tag}</span>
         ))}
-      </ul>
+      </div>
     )
   }
 </article>
-
-<style>
-  article {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.25rem;
-  }
-  h3 {
-    margin: 0 0 0.5rem;
-  }
-  h3 a {
-    color: var(--text);
-    text-decoration: none;
-  }
-  h3 a:hover {
-    color: var(--accent);
-  }
-  p {
-    margin: 0 0 1rem;
-  }
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  li {
-    font-size: 0.8rem;
-    padding: 0.15rem 0.6rem;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
-</style>

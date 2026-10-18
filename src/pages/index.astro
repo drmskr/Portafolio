@@ -1,63 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { site } from '../data/site';
+import Hero from '../components/Hero.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
 
 const featured = (await getCollection('projects', ({ data }) => data.featured))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 ---
 
-<BaseLayout>
-  <section class="hero">
-    <p class="muted">Hola, soy</p>
-    <h1>{site.name}</h1>
-    <p class="lead">{site.role}. {site.description}</p>
-    <div class="actions">
-      <a href="/projects" class="button">Ver proyectos</a>
-      <a href="/contact" class="button secondary">Contacto</a>
-    </div>
-  </section>
-
-  {
-    featured.length > 0 && (
-      <section>
-        <h2>Proyectos destacados</h2>
-        <div class="grid">
-          {featured.map((project) => (
-            <ProjectCard project={project} />
-          ))}
-        </div>
-      </section>
-    )
-  }
+<BaseLayout hideHeader>
+  <Hero />
+  <ProjectGrid title="Proyectos" projects={featured}>
+    <p style="margin-top: 32px"><a href="/projects" class="btn btn--solid">Ver todos</a></p>
+  </ProjectGrid>
 </BaseLayout>
-
-<style>
-  .hero {
-    padding: 2rem 0 3rem;
-  }
-  h1 {
-    font-size: clamp(2.25rem, 6vw, 3.5rem);
-    margin: 0 0 1rem;
-  }
-  .hero > p:first-child {
-    margin: 0;
-  }
-  .lead {
-    font-size: 1.15rem;
-    max-width: 40ch;
-  }
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem;
-  }
-</style>

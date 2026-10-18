@@ -15,13 +15,13 @@ Este es mi portafolio c: — hecho con [Astro](https://astro.build).
 
 ```text
 /
-├── public/                 # Archivos estáticos (favicon, imágenes, CV…)
+├── public/                 # Archivos estáticos (foto, flores, imágenes de proyectos…)
 ├── src/
-│   ├── components/         # Header, Footer, ProjectCard
+│   ├── components/         # Hero (portada + credencial), Header, Contact, ProjectGrid, ProjectCard
 │   ├── content/projects/   # Un archivo .md por proyecto
-│   ├── data/site.ts        # Nombre, rol, correo, redes y navegación
-│   ├── layouts/            # BaseLayout (HTML base, header y footer)
-│   ├── pages/              # Rutas: /, /about, /projects, /contact, 404
+│   ├── data/site.ts        # Nombre, ciudad, especialidad, cita, correo, imágenes y redes
+│   ├── layouts/            # BaseLayout (HTML base, fuentes, header y contacto)
+│   ├── pages/              # Rutas: /, /about, /projects, /projects/[id], 404
 │   ├── styles/global.css   # Variables de color y estilos globales
 │   └── content.config.ts   # Esquema de la colección de proyectos
 └── astro.config.mjs
@@ -40,6 +40,7 @@ tags: [Astro, CSS]
 repo: https://github.com/usuario/repo
 demo: https://mi-proyecto.com
 featured: true # aparece en la página de inicio
+image: /proyectos/mi-proyecto.jpg # opcional, en public/
 ---
 
 Contenido en Markdown…

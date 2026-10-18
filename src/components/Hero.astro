@@ -1,0 +1,49 @@
+---
+import { nav, site } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<header class="hero">
+  <div class="hero__art hero__art--left">
+    {site.artLeft ? <img src={site.artLeft} alt="" /> : <div class="placeholder" />}
+  </div>
+  <div class="hero__art hero__art--right">
+    {site.artRight ? <img src={site.artRight} alt="" /> : <div class="placeholder" />}
+  </div>
+
+  <div>
+    <nav class="hero__nav">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <div class="hero__center">
+      <p class="display-md hero__lead">This<br /> is<br /> my</p>
+
+      <!-- Credencial -->
+      <div class="badge">
+        <span class="badge__strap"></span>
+        <span class="badge__clip"></span>
+        <div class="badge__sleeve">
+          <div class="badge__card">
+            <p class="badge__title">Creative <small>license</small></p>
+            <div class="badge__photo">
+              {site.photo && <img src={site.photo} alt={site.name} />}
+            </div>
+            <div class="badge__row"><span class="label">Name:</span> {site.name}</div>
+            <div class="badge__row"><span class="label">Based in:</span> {site.basedIn}</div>
+            <div class="badge__row"><span class="label">Expertise:</span> {site.expertise}</div>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="display-xl hero__name">Port<br />fo<br /><span class="accent">lio</span></h1>
+    </div>
+  </div>
+
+  <div class="hero__footer">
+    <p class="caption">{site.expertise}</p>
+    <p class="caption quote">{site.quote.text}<br />— {site.quote.author}</p>
+    <p class="caption year">{year}</p>
+  </div>
+</header>

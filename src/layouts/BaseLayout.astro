@@ -1,16 +1,18 @@
 ---
 import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Contact from '../components/Contact.astro';
 import { site } from '../data/site';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
+  /** Oculta la barra superior (la portada trae su propia navegación). */
+  hideHeader?: boolean;
 }
 
-const { title, description = site.description } = Astro.props;
-const fullTitle = title ? `${title} | ${site.name}` : site.name;
+const { title, description = site.description, hideHeader = false } = Astro.props;
+const fullTitle = title ? `${title} — ${site.name}` : `${site.name} — Portafolio`;
 ---
 
 <!doctype html>
@@ -21,13 +23,17 @@ const fullTitle = title ? `${title} | ${site.name}` : site.name;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Poppins:wght@400;500&family=Libre+Caslon+Text&display=swap"
+    />
     <title>{fullTitle}</title>
   </head>
   <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
+    {!hideHeader && <Header />}
+    <slot />
+    <Contact />
   </body>
 </html>

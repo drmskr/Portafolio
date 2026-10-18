@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+interface Props {
+  title: string;
+  projects: CollectionEntry<'projects'>[];
+  as?: 'h1' | 'h2';
+}
+
+const { title, projects, as: Heading = 'h2' } = Astro.props;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section class="section" id="proyectos">
+  <div class="section__head">
+    <Heading class="display-md">{title}</Heading>
+    {projects.length > 0 && <p class="caption">01 — {pad(projects.length)}</p>}
+  </div>
+  <div class="projects">
+    {projects.map((project) => <ProjectCard project={project} />)}
+  </div>
+  <slot />
+</section>

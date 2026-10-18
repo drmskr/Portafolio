@@ -12,6 +12,8 @@ const projects = defineCollection({
     repo: z.string().url().optional(),
     demo: z.string().url().optional(),
     featured: z.boolean().default(false),
+    // Ruta a una imagen en /public, p. ej. '/proyectos/uno.jpg'
+    image: z.string().optional(),
   }),
 });
 
