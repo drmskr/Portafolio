@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Contacto">
+  <h1>Contacto</h1>
+  <p class="muted">¿Tienes un proyecto en mente o quieres platicar? Escríbeme.</p>
+  <p>
+    <a href={`mailto:${site.email}`} class="button">{site.email}</a>
+  </p>
+  <ul>
+    {
+      site.socials.map((s) => (
+        <li>
+          <a href={s.href} target="_blank" rel="noopener noreferrer">
+            {s.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

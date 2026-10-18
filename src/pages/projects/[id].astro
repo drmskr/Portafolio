@@ -1,0 +1,61 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { title, description, date, tags, repo, demo } = project.data;
+const { Content } = await render(project);
+---
+
+<BaseLayout title={title} description={description}>
+  <a href="/projects" class="back">← Volver a proyectos</a>
+  <article>
+    <h1>{title}</h1>
+    <p class="muted">
+      <time datetime={date.toISOString()}>
+        {date.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', timeZone: 'UTC' })}
+      </time>
+      {tags.length > 0 && <> · {tags.join(', ')}</>}
+    </p>
+    {
+      (repo || demo) && (
+        <div class="links">
+          {demo && (
+            <a href={demo} class="button" target="_blank" rel="noopener noreferrer">
+              Ver demo
+            </a>
+          )}
+          {repo && (
+            <a href={repo} class="button secondary" target="_blank" rel="noopener noreferrer">
+              Código
+            </a>
+          )}
+        </div>
+      )
+    }
+    <Content />
+  </article>
+</BaseLayout>
+
+<style>
+  .back {
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  article {
+    max-width: 70ch;
+  }
+  .links {
+    display: flex;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+</style>

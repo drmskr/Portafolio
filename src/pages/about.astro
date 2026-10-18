@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const skills = ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'Astro', 'Git'];
+---
+
+<BaseLayout title="Sobre mí">
+  <h1>Sobre mí</h1>
+  <section class="prose">
+    <p>
+      Escribe aquí una breve presentación: quién eres, qué te apasiona y qué tipo de proyectos
+      te gusta construir.
+    </p>
+  </section>
+
+  <section>
+    <h2>Habilidades</h2>
+    <ul class="skills">
+      {skills.map((skill) => <li>{skill}</li>)}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Experiencia</h2>
+    <p class="muted">Agrega tu experiencia laboral, educación o certificaciones.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose {
+    max-width: 65ch;
+  }
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+  }
+  .skills li {
+    padding: 0.35rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+  }
+</style>
